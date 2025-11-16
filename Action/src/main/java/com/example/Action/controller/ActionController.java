@@ -14,15 +14,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Action.dto.JobDto;
 import com.example.Action.model.Action;
 import com.example.Action.service.ActionService;
+import com.example.Action.service.KafkaProducerService;
 
 @RestController
 @RequestMapping("/api/actions")
 public class ActionController {
 	
 	@Autowired
+	private KafkaProducerService kafkaProducerService ; 
+	@Autowired
 	private ActionService actionService;
+	
+	
+    @PostMapping("/publish")
+    public String publishSingle(@RequestBody Action action) {
+
+        JobDto job = actionService.toJobDto(action);
+        kafkaProducerService.publishJob(job);
+
+        return "Job published successfully!";
+    }
+
+   
+    @PostMapping("/publish/all")
+    public String publishAll() {
+
+        int count = kafkaProducerService.publishAll();
+        return count + " jobs published successfully!";
+    }
+
+	
 	
 	@GetMapping
     public List<Action> getAll() {

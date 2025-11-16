@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Action.dto.JobDto;
 import com.example.Action.model.Action;
 import com.example.Action.repository.ActionRepository;
 
@@ -51,5 +52,39 @@ public class ActionService {
     public void deleteAction(UUID id) {
         actionRepository.deleteById(id);
     }
+    
+ 
+    public JobDto toJobDto(Action action) {
+        JobDto job = new JobDto();
+        job.setActionId(action.getId());
+        job.setOwnerId(action.getOwnerId());
+        job.setName(action.getName());
+        job.setMessage(action.getMessage());
+        job.setToInfo(action.getToInfo());
+        job.setActionType(action.getActionType() != null ? action.getActionType().name() : null);
+        job.setRunOnDay(action.getRunOnDay() != null ? action.getRunOnDay().name() : null);
+        job.setRunOnTime(action.getRunOnTime() != null ? action.getRunOnTime().toString() : null);
+        job.setScheduledAt(LocalDateTime.now());
+        job.setConditions(action.getConditions());
+        return job;
+    }
+    
+ 
+    public List<Action> getEnabledActions() {
+        return actionRepository.findByIsEnabledTrueAndIsDeletedFalse();
+    }
+    
+    public boolean isActionValid(UUID id) {
+        return actionRepository.existsByIdAndIsEnabledTrueAndIsDeletedFalse(id);
+    }
+    
+    public Action getActionById(UUID id){
+    	return actionRepository.getActionById(id);
+    	   
+    }
+
+
+
+
 
 }
