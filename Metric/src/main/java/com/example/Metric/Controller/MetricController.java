@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Metric.dto.MetricDto;
 import com.example.Metric.model.Metric;
 import com.example.Metric.service.MetricService;
 
@@ -28,15 +29,28 @@ public class MetricController {
         return metricService.createMetric(metric);
     }
 	
-	@GetMapping
-    public List<Metric> getAllMetrics() {
-        return metricService.getAllMetrics();
+//	@GetMapping
+//    public List<Metric> getAllMetrics() {
+//        return metricService.getAllMetrics();
+//    }
+//
+//    @GetMapping("/{id}")
+//    public Metric getMetricById(@PathVariable UUID id) {
+//        return metricService.getMetricById(id);
+//    }
+    
+    @GetMapping
+    public List<MetricDto> getAllMetrics() {
+        List<Metric> metrics = metricService.getAllMetrics();
+        return metricService.toDtoList(metrics);
     }
 
     @GetMapping("/{id}")
-    public Metric getMetricById(@PathVariable UUID id) {
-        return metricService.getMetricById(id);
+    public MetricDto getMetricById(@PathVariable UUID id) {
+        Metric metric = metricService.getMetricById(id);
+        return metricService.toDto(metric);
     }
+
 
     @PutMapping("/{id}")
     public Metric updateMetric(@PathVariable UUID id, @RequestBody Metric metric) {
