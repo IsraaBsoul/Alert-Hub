@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Loader.dto.TaskDto;
 import com.example.Loader.model.PlatformInformation;
 import com.example.Loader.model.Provider;
 import com.example.Loader.repository.PlatformInformationRepository;
@@ -142,5 +143,31 @@ public class LoaderService {
         if (index >= parts.length || parts[index] == null || parts[index].isBlank()) return "0";
         return parts[index].trim();
     }
+    
+    public TaskDto toDto(PlatformInformation info) {
+        TaskDto dto = new TaskDto();
+        dto.setOwnerId(info.getOwner_id());
+        dto.setProject(info.getProject());
+        dto.setTag(info.getTag());
+        dto.setLabel(info.getLabel());
+        dto.setDeveloperId(info.getDeveloper_id());
+        dto.setTaskNumber(info.getTask_number());
+        dto.setEnvironment(info.getEnvironment());
+        dto.setUserStory(info.getUser_story());
+        dto.setTaskPoint(info.getTask_point());
+        dto.setSprint(info.getSprint());
+        dto.setTimestamp(info.getTimestamp());
+        return dto;
+    }
+
+    public List<TaskDto> toDtoList(List<PlatformInformation> infos) {
+        return infos.stream().map(this::toDto).toList();
+    }
+    
+    public List<TaskDto> getAllTasks() {
+        List<PlatformInformation> tasks = platformInfoRepo.findAll();
+        return toDtoList(tasks);
+    }
+
 }
 

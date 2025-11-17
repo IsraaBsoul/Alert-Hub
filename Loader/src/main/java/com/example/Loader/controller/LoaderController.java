@@ -7,9 +7,11 @@ import java.util.List;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.Loader.dto.TaskDto;
 import com.example.Loader.model.Provider;
 import com.example.Loader.service.LoaderService;
 
@@ -19,6 +21,12 @@ public class LoaderController {
 	
 	@Autowired
 	private LoaderService loaderService;
+	
+	@GetMapping("/tasks")
+	public List<TaskDto> getAllTasks() {
+	    return loaderService.getAllTasks();
+	}
+
 	
 	@PostMapping("/{provider}")
 	public ResponseEntity<String> loadProvider(@PathVariable Provider provider) {
@@ -38,6 +46,8 @@ public class LoaderController {
 
 
 	}
+
+
 
 
 }
