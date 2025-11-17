@@ -42,12 +42,13 @@ public class ActionScheduler {
 
         List<Action> candidates = service.getEnabledActions(); 
         for (Action action : candidates) {
-        	// update lastRun timestamp
-            action.setLastRun(LocalDateTime.now());
+        	
         	
             if (action.getRunOnDay() == RunDay.ALL || action.getRunOnDay() == todayRunDay) {
                 LocalTime actionTime = action.getRunOnTime();
                 if (actionTime != null && actionTime.equals(LocalTime.now())) {
+                	// update lastRun timestamp
+                    action.setLastRun(LocalDateTime.now());
                     // publish job
                     JobDto job = service.toJobDto(action);
                     jobProducer.publishJob(job);

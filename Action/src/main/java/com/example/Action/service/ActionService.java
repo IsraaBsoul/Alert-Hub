@@ -56,15 +56,22 @@ public class ActionService {
  
     public JobDto toJobDto(Action action) {
         JobDto job = new JobDto();
-        job.setActionId(action.getId());
+        
+        job.setId(action.getId());
         job.setOwnerId(action.getOwnerId());
         job.setName(action.getName());
+        job.setCreateDate(action.getCreateDate());
+        job.setActionType(action.getActionType() != null ? action.getActionType().name() : null);
+        job.setRunOnTime(action.getRunOnTime());
+        job.setRunOnDay(action.getRunOnDay() != null ? action.getRunOnDay().name() : null);
+        
         job.setMessage(action.getMessage());
         job.setToInfo(action.getToInfo());
-        job.setActionType(action.getActionType() != null ? action.getActionType().name() : null);
-        job.setRunOnDay(action.getRunOnDay() != null ? action.getRunOnDay().name() : null);
-        job.setRunOnTime(action.getRunOnTime() != null ? action.getRunOnTime().toString() : null);
-        job.setScheduledAt(LocalDateTime.now());
+        job.setIsEnabled(action.getIsEnabled());
+        job.setIsDeleted(action.getIsDeleted());
+        job.setLastUpdate(action.getLastUpdate());
+        
+      
         job.setConditions(action.getConditions());
         return job;
     }

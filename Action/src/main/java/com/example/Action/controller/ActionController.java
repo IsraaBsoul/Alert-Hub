@@ -38,14 +38,6 @@ public class ActionController {
         return "Job published successfully!";
     }
 
-   
-    @PostMapping("/publish/all")
-    public String publishAll() {
-
-        int count = kafkaProducerService.publishAll();
-        return count + " jobs published successfully!";
-    }
-
 	
 	
 	@GetMapping
