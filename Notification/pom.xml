@@ -64,6 +64,8 @@
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+		
+
 	</dependencies>
 	
 	<dependencyManagement>
@@ -75,6 +77,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 
