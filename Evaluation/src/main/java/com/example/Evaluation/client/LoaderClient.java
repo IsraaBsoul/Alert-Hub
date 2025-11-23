@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.Evaluation.dto.TaskDto;
 
-@FeignClient(name = "loader", url = "http://localHost:8080/api/loader")
+@FeignClient(name = "loader-service", url = "http://localHost:8080/api/loader")
 public interface LoaderClient {
-	  @GetMapping("/api/loader/tasks")
+	  @GetMapping("/tasks")
 	    List<TaskDto> getAllTasks();
 }

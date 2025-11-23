@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Evaluation.client.LoaderClient;
-import com.example.Evaluation.dto.NotificationPublisher;
 import com.example.Evaluation.dto.TaskDto;
 
 @Service
 public class LabelAggregationService {
-	 @Autowired
+		@Autowired
 	    private LoaderClient loaderClient;
 
 	    @Autowired

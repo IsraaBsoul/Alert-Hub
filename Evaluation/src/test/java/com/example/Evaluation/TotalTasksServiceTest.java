@@ -18,8 +18,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.example.Evaluation.client.LoaderClient;
-import com.example.Evaluation.dto.NotificationPublisher;
 import com.example.Evaluation.dto.TaskDto;
+import com.example.Evaluation.service.NotificationPublisher;
 import com.example.Evaluation.service.TotalTasksService;
 
 public class TotalTasksServiceTest {
