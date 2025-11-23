@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.User.model.User;
 import com.example.User.service.UserService;
+import com.example.User.util.JwtUserContext;
+import com.example.User.util.PermissionClient;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/user")
@@ -22,6 +27,22 @@ public class UserController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private PermissionClient permissionClient;
+
+    // Admin-only user creation
+    @PostMapping
+    public ResponseEntity<?> createUserByAdmin(@RequestBody User user, HttpServletRequest request) {
+        int requesterId = JwtUserContext.getUserId(request);
+
+        // Admin check
+        boolean allowed = permissionClient.hasPermission(requesterId, "admin");
+        if (!allowed) {
+            return ResponseEntity.status(403).body("Forbidden - Admin only");
+        }
+
+        return ResponseEntity.ok(service.createUser(user));
+    }
 
     // Create
     @PostMapping
@@ -59,4 +80,33 @@ public class UserController {
         service.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+    
+    // Delete - admin only
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUserByAdmin(@PathVariable int id, HttpServletRequest request) {
+        int requesterId = JwtUserContext.getUserId(request);
+
+        boolean allowed = permissionClient.hasPermission(requesterId, "admin");
+        if (!allowed) {
+            return ResponseEntity.status(403).body("Forbidden - Admin only");
+        }
+
+        service.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+    
+ // Get user by email
+    @GetMapping("/by-email")
+    public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
+        return service.getUserByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Check if email exists
+    @GetMapping("/exists")
+    public boolean checkEmailExists(@RequestParam String email) {
+        return service.existsByEmail(email);
+    }
+
 }

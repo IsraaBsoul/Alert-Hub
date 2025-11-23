@@ -45,4 +45,14 @@ public class UserService {
     public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
+    
+    // Read by email
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    // Check if email exists
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
 }
