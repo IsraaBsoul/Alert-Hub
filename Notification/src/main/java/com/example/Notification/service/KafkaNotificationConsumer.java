@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import com.example.Notification.dto.JobDto;
+import com.example.Notification.dto.NotificationDto;
 
 @Component
 public class KafkaNotificationConsumer {
@@ -15,14 +15,14 @@ public class KafkaNotificationConsumer {
 	    private EmailNotificationService emailService;
 
 	    @KafkaListener(topics = "SmsQueue", groupId = "notification-group")
-	    public void consumeSms(JobDto job) {
-	        System.out.println("Received SMS job: " + job.getName());
+	    public void consumeSms(NotificationDto job) {
+	        System.out.println("Received SMS job: " + job.getMessage());
 	        smsService.sendSms(job);
 	    }
 
 	    @KafkaListener(topics = "EmailQueue", groupId = "notification-group")
-	    public void consumeEmail(JobDto job) {
-	        System.out.println("Received Email job: " + job.getName());
+	    public void consumeEmail(NotificationDto job) {
+	        System.out.println("Received Email job: " + job.getMessage());
 	        emailService.sendEmail(job);
 	    }
 	    

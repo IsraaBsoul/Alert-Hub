@@ -6,7 +6,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.Notification.dto.LogRequest;
-import com.example.Notification.dto.JobDto;
+import com.example.Notification.dto.NotificationDto;
+
 
 import com.example.Notification.client.LoggerClient;
 
@@ -18,7 +19,7 @@ public class EmailNotificationService {
 	@Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmail(JobDto job) {
+    public void sendEmail(NotificationDto job) {
     	SimpleMailMessage mail = new SimpleMailMessage();
         mail.setFrom("nmn01927@gmail.com"); 
         mail.setTo(job.getToInfo());         

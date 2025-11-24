@@ -1,9 +1,9 @@
 package com.example.Notification.config;
 
 
-import com.example.Notification.dto.JobDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -12,6 +12,8 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
+import com.example.Notification.dto.NotificationDto;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,14 +21,15 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConsumerConfig {
 
-    private final String bootstrapServers = "localhost:9092"; // or use @Value("${spring.kafka.bootstrap-servers}")
-
+	@Value("${spring.kafka.bootstrap-servers}")
+    private String bootstrapServers;
+	
     private final String groupId = "notification-group"; // must match the @KafkaListener groupId
 
     @Bean
-    public ConsumerFactory<String, JobDto> jobConsumerFactory() {
+    public ConsumerFactory<String, NotificationDto> jobConsumerFactory() {
         // Configure JSON deserializer
-        JsonDeserializer<JobDto> deserializer = new JsonDeserializer<>(JobDto.class);
+        JsonDeserializer<NotificationDto> deserializer = new JsonDeserializer<>(NotificationDto.class);
         deserializer.addTrustedPackages("*"); // trust your DTO package
         deserializer.setRemoveTypeHeaders(false); // optional
         deserializer.setUseTypeMapperForKey(true);
@@ -42,8 +45,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, JobDto> jobKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, JobDto> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, NotificationDto> jobKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, NotificationDto> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(jobConsumerFactory());
         return factory;

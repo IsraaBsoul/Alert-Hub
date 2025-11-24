@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Notification.client.LoggerClient;
-import com.example.Notification.dto.JobDto;
+
 import com.example.Notification.dto.LogRequest;
+import com.example.Notification.dto.NotificationDto;
 
 @Service
 public class SmsNotificationService {
@@ -13,7 +14,7 @@ public class SmsNotificationService {
 	@Autowired
 	private LoggerClient loggerClient;
  
-    public void sendSms(JobDto job) {
+    public void sendSms(NotificationDto job) {
         System.out.println("Sending SMS to " + job.getToInfo() + ": " + job.getMessage());
         loggerClient.log(new LogRequest(
         	       "SMS-Service",
