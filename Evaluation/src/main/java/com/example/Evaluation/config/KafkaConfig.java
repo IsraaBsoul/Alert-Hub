@@ -13,7 +13,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import com.example.Evaluation.dto.ResponseDto;
+import com.example.Evaluation.dto.NotificationDto;
+
 
 
 
@@ -26,7 +27,7 @@ public class KafkaConfig {
 	
 	public Map<String , Object> producerConfig()
 	{
-		Map<String ,Object> props= new HashMap<String, Object>();
+		Map<String ,Object> props= new HashMap<>();
 		props.put( ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
@@ -35,12 +36,12 @@ public class KafkaConfig {
 	}
 	
 	@Bean
-    public ProducerFactory<String, ResponseDto> producerFactory() {
+    public ProducerFactory<String, NotificationDto> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
     @Bean
-    public KafkaTemplate<String, ResponseDto> kafkaTemplate() {
+    public KafkaTemplate<String, NotificationDto> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 	

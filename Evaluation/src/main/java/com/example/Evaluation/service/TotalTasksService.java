@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Evaluation.client.LoaderClient;
+import com.example.Evaluation.dto.NotificationDto;
 import com.example.Evaluation.dto.TaskDto;
 
 @Service
@@ -17,7 +18,7 @@ public class TotalTasksService {
     @Autowired
     private NotificationPublisher notificationPublisher;
 
-    public int getTotalTasksForDeveloper(String developerId, int sinceDays) {
+    public int getTotalTasksForDeveloper(String developerId, int sinceDays, String requesterEmail) {
         LocalDateTime since = LocalDateTime.now().minusDays(sinceDays);
 
         List<TaskDto> tasks = loaderClient.getAllTasks();
@@ -32,8 +33,13 @@ public class TotalTasksService {
         }
 
         String message = "Developer '" + developerId + "' has " + totalTasks + " tasks in the last " + sinceDays + " days.";
-        notificationPublisher.publishEmail(message);
-
+      
+        
+        NotificationDto dto = new NotificationDto();
+        dto.setMessage(message);
+        dto.setToInfo(requesterEmail);
+        notificationPublisher.publish(dto);
+        
         return totalTasks;
     }
 }

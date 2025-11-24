@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Evaluation.client.LoaderClient;
+import com.example.Evaluation.dto.NotificationDto;
 import com.example.Evaluation.dto.TaskDto;
 
 @Service
@@ -20,7 +21,7 @@ public class LabelAggregationService {
 	    private NotificationPublisher notificationPublisher;
 
 	    
-	    public Map<String, Integer> getLabelAggregationForDeveloper(String developerId, int sinceDays) {
+	    public Map<String, Integer> getLabelAggregationForDeveloper(String developerId, int sinceDays,String requesterEmail) {
 	        LocalDateTime since = LocalDateTime.now().minusDays(sinceDays);
 
 	        // Fetch all tasks from loader
@@ -37,9 +38,16 @@ public class LabelAggregationService {
 	                labelCountMap.put(task.getLabel(), labelCountMap.getOrDefault(task.getLabel(), 0) + 1);
 	            }
 	        }
-
+//
 	        String message = "Developer '" + developerId + "' label aggregation in last " + sinceDays + " days: " + labelCountMap;
-	        notificationPublisher.publishEmail(message);
+//	        notificationPublisher.publishEmail(message);
+
+	        NotificationDto dto = new NotificationDto();
+	        dto.setMessage(message);
+	        dto.setToInfo(requesterEmail);
+	        
+
+	        notificationPublisher.publish(dto);
 
 	        return labelCountMap;
 	    }

@@ -56,8 +56,9 @@ public class EvaluationController {
         if (!hasEvaluationPermission(userId)) {
             return ResponseEntity.status(403).body("Forbidden - You lack triggerEvaluation/Admin permission");
         }
+        String requesterEmail = JwtUserContext.getUserEmail(request);
 
-        TopDeveloperResponse response = topDeveloperService.getTopDeveloperByLabel(label, since);
+        TopDeveloperResponse response = topDeveloperService.getTopDeveloperByLabel(label, since,requesterEmail);
         return ResponseEntity.ok(response);
     }
     
@@ -84,7 +85,8 @@ public class EvaluationController {
             return ResponseEntity.status(403).body("Forbidden - You lack triggerEvaluation/Admin permission");
         }
 
-        Map<String, Integer> result = labelAggregationService.getLabelAggregationForDeveloper(developerId, since);
+        String requesterEmail = JwtUserContext.getUserEmail(request);
+        Map<String, Integer> result = labelAggregationService.getLabelAggregationForDeveloper(developerId, since,requesterEmail);
         return ResponseEntity.ok(result);
     }
     
@@ -108,8 +110,9 @@ public class EvaluationController {
         if (!hasEvaluationPermission(userId)) {
             return ResponseEntity.status(403).body("Forbidden - You lack triggerEvaluation/Admin permission");
         }
-
-        int totalTasks = totalTasksService.getTotalTasksForDeveloper(developerId, since);
+        
+        String requesterEmail = JwtUserContext.getUserEmail(request);
+        int totalTasks = totalTasksService.getTotalTasksForDeveloper(developerId, since,requesterEmail);
         return ResponseEntity.ok(totalTasks);
     }
 }

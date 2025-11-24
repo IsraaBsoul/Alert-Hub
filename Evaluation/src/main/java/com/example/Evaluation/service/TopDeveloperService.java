@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Evaluation.client.LoaderClient;
+import com.example.Evaluation.dto.NotificationDto;
 import com.example.Evaluation.dto.TaskDto;
 import com.example.Evaluation.dto.TopDeveloperResponse;
 import com.example.Evaluation.exception.LoaderServiceException;
@@ -23,7 +24,7 @@ public class TopDeveloperService {
     @Autowired
     private NotificationPublisher notificationPublisher;
 
-    public TopDeveloperResponse getTopDeveloperByLabel(String label, int sinceDays) {
+    public TopDeveloperResponse getTopDeveloperByLabel(String label, int sinceDays,String requesterEmail) {
 
         LocalDateTime since = LocalDateTime.now().minusDays(sinceDays);
         List<TaskDto> tasks;
@@ -65,13 +66,16 @@ public class TopDeveloperService {
 
         TopDeveloperResponse response = new TopDeveloperResponse(topDeveloperId,label,maxCount);
 
-        try {
-            String message = "Top developer for label '" + label + "' is " +
-                    topDeveloperId + " with " + maxCount + " tasks.";
-            notificationPublisher.publishEmail(message);
-        } catch (Exception ex) {
-            throw new NotificationException("Failed to publish notification", ex);
-        }
+        String message = "Top developer for label '" + label + "' is " +
+                topDeveloperId + " with " + maxCount + " tasks.";
+        
+        
+        NotificationDto dto = new NotificationDto();
+        dto.setMessage(message);
+        dto.setToInfo(requesterEmail);
+        notificationPublisher.publish(dto);
+        
+
 
         return response;
     }
