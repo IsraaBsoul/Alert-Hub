@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 import com.example.Processor.client.LoggerClient;
 import com.example.Processor.dto.JobDto;
 import com.example.Processor.dto.LogRequest;
+import com.example.Processor.dto.NotificationDto;
 
 @Service
 public class KafkaNotificationProducer {
 
 	@Autowired
-    private KafkaTemplate<String, JobDto> kafkaTemplate;
+    private KafkaTemplate<String, NotificationDto> kafkaTemplate;
 	@Autowired
 	private LoggerClient loggerClient;
 
@@ -30,11 +31,15 @@ public class KafkaNotificationProducer {
             "Published job " + job.getName() + " to Kafka topic: " + topic
         ));
         
+        NotificationDto notification=new NotificationDto();;
+        notification.setToInfo(job.getToInfo());
+        notification.setMessage(job.getMessage());
+        
         if ("SMS".equalsIgnoreCase(job.getActionType())) {
-            kafkaTemplate.send(SMS_TOPIC, job);
+            kafkaTemplate.send(SMS_TOPIC, notification);
             System.out.println("Sent SMS job to Kafka: " + job.getName());
         } else if ("EMAIL".equalsIgnoreCase(job.getActionType())) {
-            kafkaTemplate.send(EMAIL_TOPIC, job);
+            kafkaTemplate.send(EMAIL_TOPIC, notification);
             System.out.println("Sent Email job to Kafka: " + job.getName());
         } else {
             System.out.println("Unknown action type: " + job.getActionType());

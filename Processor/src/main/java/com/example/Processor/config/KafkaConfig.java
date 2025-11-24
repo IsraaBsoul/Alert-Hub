@@ -13,6 +13,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.example.Processor.dto.JobDto;
+import com.example.Processor.dto.NotificationDto;
 import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 
 @Configuration
@@ -31,12 +32,12 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ProducerFactory<String, JobDto> producerFactory() {
+    public ProducerFactory<String, NotificationDto> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, JobDto> kafkaTemplate() {
+    public KafkaTemplate<String, NotificationDto> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
