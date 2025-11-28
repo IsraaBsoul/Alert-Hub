@@ -56,10 +56,10 @@ Evaluates action conditions and produces Kafka messages when thresholds are met.
 10. **Evaluation Service**
 Provides analytics on developer workload and performance based on stored platform data.
 
-9. **Logger Service**
+11. **Logger Service**
 Stores logs from all microservices in MongoDB for monitoring and tracing.
 
-10. **Gateway Service**
+12. **Gateway Service**
 Handles routing, authentication, and service communication .
 
 <i>**Technology Stack**</i>
