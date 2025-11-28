@@ -24,7 +24,7 @@ Ensures efficient distribution of traffic across services to maintain responsive
 6. **Secure Access Control**
 Implements JWT and Spring Security for user authentication and role-based authorization.
 
-<i>**System Services Overview**</i>
+<i>**System Services Overview :**</i>
 
 1. **Notification Service**
 Sends email and SMS notifications by consuming messages from Kafka topics.
@@ -64,20 +64,20 @@ Handles routing, authentication, and service communication .
 
 <i>**Technology Stack**</i>
 
- **Java** — Core programming language.
-
- **Spring Boot** — Framework for building the microservices.
-
- **Spring Security** — Authentication and authorization.
-
- **Spring Cloud Gateway** — API routing and filtering.
-
- **OpenFeign** — Declarative HTTP client for inter-service communication.
-
- **Apache Kafka** — Message broker for asynchronous events.
-
- **SQL** — Relational database.
-
- **MongoDB** — NoSQL database .
-
- **Microservices Architecture** — Independent, scalable componen
+   **Java** — Core programming language.
+  
+   **Spring Boot** — Framework for building the microservices.
+  
+   **Spring Security** — Authentication and authorization.
+  
+   **Spring Cloud Gateway** — API routing and filtering.
+  
+   **OpenFeign** — Declarative HTTP client for inter-service communication.
+  
+   **Apache Kafka** — Message broker for asynchronous events.
+  
+   **SQL** — Relational database.
+  
+   **MongoDB** — NoSQL database .
+  
+   **Microservices Architecture** — Independent, scalable componen
