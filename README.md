@@ -1,10 +1,10 @@
-**Alert-Hub (Microservices Architecture)**
-\n**Overview**
+**Alert-Hub (Microservices Architecture)**<br>
+**Overview**
 
 Alert-Hub is a distributed microservices-based system that provides real-time notifications to project managers when tasks are updated across external platforms such as Jira, ClickUp, and GitHub.
 The system is built using an event-driven architecture, leveraging Kafka for message handling and Spring Boot for backend services. It is designed for scalability, modularity, and high availability.
 
-**Features :**
+\**Features :**\
 
 1.**Real-Time Notifications**
 Instantly alerts users when task status changes occur in external project management tools.
@@ -62,7 +62,7 @@ Stores logs from all microservices in MongoDB for monitoring and tracing.
 10. **Gateway Service**
 Handles routing, authentication, and service communication .
 
-**Technology Stack**
+\**Technology Stack**\
 
 **Java** — Core programming language.
 
