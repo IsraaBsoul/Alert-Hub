@@ -4,7 +4,7 @@
 Alert-Hub is a distributed microservices-based system that provides real-time notifications to project managers when tasks are updated across external platforms such as Jira, ClickUp, and GitHub.
 The system is built using an event-driven architecture, leveraging Kafka for message handling and Spring Boot for backend services. It is designed for scalability, modularity, and high availability.
 
-\**Features :**\
+<i>**Features :**</i>
 
 1.**Real-Time Notifications**
 Instantly alerts users when task status changes occur in external project management tools.
