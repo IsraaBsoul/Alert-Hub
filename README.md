@@ -6,22 +6,22 @@ The system is built using an event-driven architecture, leveraging Kafka for mes
 
 <i>**Features :**</i>
 
-1.**Real-Time Notifications**
+1. **Real-Time Notifications**
 Instantly alerts users when task status changes occur in external project management tools.
 
-2.**Microservices Architecture**
+2. **Microservices Architecture**
 Built from ten independent services that can be deployed and scaled individually.
 
-3.**Event-Driven Messaging Layer**
+3. **Event-Driven Messaging Layer**
 Uses Apache Kafka to support asynchronous, reliable communication between services.
 
-4.**API Gateway**
+4. **API Gateway**
 Centralized entry point responsible for routing, request validation, and authentication.
 
-5.**Load Balancing**
+5. **Load Balancing**
 Ensures efficient distribution of traffic across services to maintain responsiveness under load.
 
-6.**Secure Access Control**
+6. **Secure Access Control**
 Implements JWT and Spring Security for user authentication and role-based authorization.
 
 <i>**System Services Overview**</i>
@@ -64,20 +64,20 @@ Handles routing, authentication, and service communication .
 
 <i>**Technology Stack**</i>
 
-**Java** — Core programming language.
+ **Java** — Core programming language.
 
-**Spring Boot** — Framework for building the microservices.
+ **Spring Boot** — Framework for building the microservices.
 
-**Spring Security** — Authentication and authorization.
+ **Spring Security** — Authentication and authorization.
 
-**Spring Cloud Gateway** — API routing and filtering.
+ **Spring Cloud Gateway** — API routing and filtering.
 
-**OpenFeign** — Declarative HTTP client for inter-service communication.
+ **OpenFeign** — Declarative HTTP client for inter-service communication.
 
-**Apache Kafka** — Message broker for asynchronous events.
+ **Apache Kafka** — Message broker for asynchronous events.
 
-**SQL** — Relational database.
+ **SQL** — Relational database.
 
-**MongoDB** — NoSQL database .
+ **MongoDB** — NoSQL database .
 
-**Microservices Architecture** — Independent, scalable componen
+ **Microservices Architecture** — Independent, scalable componen
