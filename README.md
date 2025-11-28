@@ -24,7 +24,7 @@ Ensures efficient distribution of traffic across services to maintain responsive
 6.**Secure Access Control**
 Implements JWT and Spring Security for user authentication and role-based authorization.
 
-**System Services Overview**
+<i>**System Services Overview**</i>
 
 1. **Notification Service**
 Sends email and SMS notifications by consuming messages from Kafka topics.
@@ -62,7 +62,7 @@ Stores logs from all microservices in MongoDB for monitoring and tracing.
 10. **Gateway Service**
 Handles routing, authentication, and service communication .
 
-\**Technology Stack**\
+<i>**Technology Stack**</i>
 
 **Java** — Core programming language.
 
