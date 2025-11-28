@@ -1,5 +1,5 @@
 **Alert-Hub (Microservices Architecture)**
-**Overview**
+\n**Overview**
 
 Alert-Hub is a distributed microservices-based system that provides real-time notifications to project managers when tasks are updated across external platforms such as Jira, ClickUp, and GitHub.
 The system is built using an event-driven architecture, leveraging Kafka for message handling and Spring Boot for backend services. It is designed for scalability, modularity, and high availability.
@@ -26,62 +26,58 @@ Implements JWT and Spring Security for user authentication and role-based author
 
 **System Services Overview**
 
-1.Notification Service
+1. **Notification Service**
 Sends email and SMS notifications by consuming messages from Kafka topics.
 
-2.Event Listener Service
+2. **Event Listener Service**
 Listens to Jira, GitHub, and ClickUp updates and publishes events to Kafka.
 
-3.User Service
+3. **User Service**
 Manages user accounts, roles, and permissions stored in MySQL.
 
-4.Security Service
+4. **Security Service**
 Handles authentication (JWT), authorization, and permission validation.
 
-5.Loader Services
+5. **Loader Services**
 Scan platform data files hourly (or manually), transform them, and load results into the platformInformation table.
 
-6.Metric Service
+6. **Metric Service**
 Stores and manages metric definitions such as thresholds, labels, and time frames.
 
-7.Action Service
+7. **Action Service**
 Defines actions with conditions, schedules, messages, and delivery types (SMS/Email).
 
-8.Job Scheduler Service
+8. **Job Scheduler Service**
 Runs every 30 minutes to identify and queue actions that match schedule constraints.
 
-9.Processor Service
+9. **Processor Service**
 Evaluates action conditions and produces Kafka messages when thresholds are met.
 
-10.Evaluation Service
+10. **Evaluation Service**
 Provides analytics on developer workload and performance based on stored platform data.
 
-9.Logger Service
+9. **Logger Service**
 Stores logs from all microservices in MongoDB for monitoring and tracing.
 
-10.Gateway Service
+10. **Gateway Service**
 Handles routing, authentication, and service communication .
 
 **Technology Stack**
 
-Java — Core programming language.
+**Java** — Core programming language.
 
-Spring Boot — Framework for building the microservices.
+**Spring Boot** — Framework for building the microservices.
 
-Spring Security — Authentication and authorization.
+**Spring Security** — Authentication and authorization.
 
-Spring Cloud Gateway — API routing and filtering.
+**Spring Cloud Gateway** — API routing and filtering.
 
-OpenFeign — Declarative HTTP client for inter-service communication.
+**OpenFeign** — Declarative HTTP client for inter-service communication.
 
-Apache Kafka — Message broker for asynchronous events.
+**Apache Kafka** — Message broker for asynchronous events.
 
-SQL — Relational database.
+**SQL** — Relational database.
 
-MongoDB — NoSQL database .
+**MongoDB** — NoSQL database .
 
-Docker — Containerization for running services.
-
-Load Balancer — Traffic distribution.
-
-Microservices Architecture — Independent, scalable componen
+**Microservices Architecture** — Independent, scalable componen
