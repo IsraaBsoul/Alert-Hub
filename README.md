@@ -64,20 +64,20 @@ Handles routing, authentication, and service communication .
 
 <i>**Technology Stack**</i>
 
--  **Java** — Core programming language.
+-  **Java** - Core programming language.
 
--  **Spring Boot** — Framework for building the microservices.
+-  **Spring Boot** - Framework for building the microservices.
       
--  **Spring Security** — Authentication and authorization.
+-  **Spring Security** - Authentication and authorization.
       
--  **Spring Cloud Gateway** — API routing and filtering.
+-  **Spring Cloud Gateway** - API routing and filtering.
       
--  **OpenFeign** — Declarative HTTP client for inter-service communication.
+-  **OpenFeign** - Declarative HTTP client for inter-service communication.
       
--  **Apache Kafka** — Message broker for asynchronous events.
+-  **Apache Kafka** - Message broker for asynchronous events.
       
--  **SQL** — Relational database.
+-  **SQL** - Relational database.
       
--  **MongoDB** — NoSQL database .
+-  **MongoDB** - NoSQL database .
       
--  **Microservices Architecture** — Independent, scalable components
+-  **Microservices Architecture** - Independent, scalable components
